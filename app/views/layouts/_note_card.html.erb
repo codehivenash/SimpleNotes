@@ -1,0 +1,13 @@
+<div class="card-columns" style="padding-bottom: 3rem">
+  <% @notes.each do |note| %>
+      <div class="card card-block">
+        <h4 class="card-title"><%= note.name %></h4>
+        <p class="card-text"><%= note.description %></p>
+        <!-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
+        <p class="card-text"><small class="text-muted"><%= note.owner %></small></p>
+      </div>
+    <% end %>
+</div>
+
+
+ 

@@ -1,0 +1,27 @@
+
+<div class="row">
+<p id="notice"><%= notice %></p>
+<h1><%= @notebook.name %></h1>
+	<p>
+		<strong>Owner:</strong>
+		<%= @notebook.owner %>
+	</p>
+
+	<p>
+		<strong>Description:</strong>
+		<%= @notebook.description %>
+	</p>
+
+	<%= link_to 'Edit', edit_notebook_path(@notebook) %> |
+	<%= link_to 'Back', notebooks_path %>
+</div>
+<div class="row" style="padding-top: 3rem">
+	<h1 style="padding-bottom: 1rem">Notes</h1>
+	<%= render :partial => "layouts/note_card" %>
+</div>
+<div class="row" style="padding-bottom: 3rem">
+<%= link_to 'New Note', new_note_path, :locals => {:notebook => @notebook } %>
+</div>
+
+
+
