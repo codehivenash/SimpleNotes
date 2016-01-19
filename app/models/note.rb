@@ -6,4 +6,10 @@ class Note < ActiveRecord::Base
 
 	has_many :NoteTexts
 	has_many :texts, :through => :NoteTexts
+
+	has_many :NoteVideos
+	has_many :videos, :through => :NoteVideos
+
+	has_many :NoteAudios
+	has_many :audios, :through => :NoteAudios
 end

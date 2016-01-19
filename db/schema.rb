@@ -11,7 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160118221744) do
+ActiveRecord::Schema.define(version: 20160119220441) do
+
+  create_table "audios", force: :cascade do |t|
+    t.string   "name",        limit: 255
+    t.string   "description", limit: 255
+    t.string   "tags",        limit: 255
+    t.string   "owner",       limit: 255
+    t.integer  "status",      limit: 4
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
 
   create_table "images", force: :cascade do |t|
     t.string   "name",        limit: 255
@@ -32,10 +42,15 @@ ActiveRecord::Schema.define(version: 20160118221744) do
     t.datetime "updated_at",              null: false
   end
 
-  create_table "links_notes", id: false, force: :cascade do |t|
-    t.integer "note_id", limit: 4, null: false
-    t.integer "link_id", limit: 4, null: false
+  create_table "note_audios", force: :cascade do |t|
+    t.integer  "note_id",    limit: 4
+    t.integer  "audio_id",   limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
   end
+
+  add_index "note_audios", ["audio_id"], name: "index_note_audios_on_audio_id", using: :btree
+  add_index "note_audios", ["note_id"], name: "index_note_audios_on_note_id", using: :btree
 
   create_table "note_links", force: :cascade do |t|
     t.datetime "created_at",           null: false
@@ -57,6 +72,16 @@ ActiveRecord::Schema.define(version: 20160118221744) do
   add_index "note_texts", ["note_id"], name: "index_note_texts_on_note_id", using: :btree
   add_index "note_texts", ["text_id"], name: "index_note_texts_on_text_id", using: :btree
 
+  create_table "note_videos", force: :cascade do |t|
+    t.integer  "note_id",    limit: 4
+    t.integer  "video_id",   limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_index "note_videos", ["note_id"], name: "index_note_videos_on_note_id", using: :btree
+  add_index "note_videos", ["video_id"], name: "index_note_videos_on_video_id", using: :btree
+
   create_table "notebooks", force: :cascade do |t|
     t.string   "name",        limit: 255
     t.string   "owner",       limit: 255
@@ -77,11 +102,6 @@ ActiveRecord::Schema.define(version: 20160118221744) do
   end
 
   add_index "notes", ["notebook_id"], name: "index_notes_on_notebook_id", using: :btree
-
-  create_table "notes_texts", id: false, force: :cascade do |t|
-    t.integer "note_id", limit: 4, null: false
-    t.integer "text_id", limit: 4, null: false
-  end
 
   create_table "texts", force: :cascade do |t|
     t.string   "name",        limit: 255
@@ -129,10 +149,14 @@ ActiveRecord::Schema.define(version: 20160118221744) do
     t.datetime "updated_at",              null: false
   end
 
+  add_foreign_key "note_audios", "audios"
+  add_foreign_key "note_audios", "notes"
   add_foreign_key "note_links", "links"
   add_foreign_key "note_links", "notes"
   add_foreign_key "note_texts", "notes"
   add_foreign_key "note_texts", "texts"
+  add_foreign_key "note_videos", "notes"
+  add_foreign_key "note_videos", "videos"
   add_foreign_key "notes", "notebooks"
   add_foreign_key "user_notebooks", "notebooks"
   add_foreign_key "user_notebooks", "users"
