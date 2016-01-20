@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160120132102) do
+ActiveRecord::Schema.define(version: 20160120152707) do
 
   create_table "audios", force: :cascade do |t|
     t.string   "name",        limit: 255
@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 20160120132102) do
     t.integer  "status",      limit: 4
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
+    t.string   "img",         limit: 255
   end
 
   create_table "links", force: :cascade do |t|
@@ -43,6 +44,11 @@ ActiveRecord::Schema.define(version: 20160120132102) do
     t.datetime "updated_at",              null: false
   end
 
+  create_table "links_notes", id: false, force: :cascade do |t|
+    t.integer "note_id", limit: 4, null: false
+    t.integer "link_id", limit: 4, null: false
+  end
+
   create_table "note_audios", force: :cascade do |t|
     t.integer  "note_id",    limit: 4
     t.integer  "audio_id",   limit: 4
@@ -52,6 +58,16 @@ ActiveRecord::Schema.define(version: 20160120132102) do
 
   add_index "note_audios", ["audio_id"], name: "index_note_audios_on_audio_id", using: :btree
   add_index "note_audios", ["note_id"], name: "index_note_audios_on_note_id", using: :btree
+
+  create_table "note_images", force: :cascade do |t|
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.integer  "note_id",    limit: 4
+    t.integer  "image_id",   limit: 4
+  end
+
+  add_index "note_images", ["image_id"], name: "index_note_images_on_image_id", using: :btree
+  add_index "note_images", ["note_id"], name: "index_note_images_on_note_id", using: :btree
 
   create_table "note_links", force: :cascade do |t|
     t.datetime "created_at",           null: false
@@ -104,6 +120,11 @@ ActiveRecord::Schema.define(version: 20160120132102) do
 
   add_index "notes", ["notebook_id"], name: "index_notes_on_notebook_id", using: :btree
 
+  create_table "notes_texts", id: false, force: :cascade do |t|
+    t.integer "note_id", limit: 4, null: false
+    t.integer "text_id", limit: 4, null: false
+  end
+
   create_table "texts", force: :cascade do |t|
     t.string   "name",        limit: 255
     t.string   "description", limit: 255
@@ -135,6 +156,7 @@ ActiveRecord::Schema.define(version: 20160120132102) do
     t.string   "last_sign_in_ip",        limit: 255
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false
+    t.string   "avatar",                 limit: 255
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
@@ -153,6 +175,8 @@ ActiveRecord::Schema.define(version: 20160120132102) do
 
   add_foreign_key "note_audios", "audios"
   add_foreign_key "note_audios", "notes"
+  add_foreign_key "note_images", "images"
+  add_foreign_key "note_images", "notes"
   add_foreign_key "note_links", "links"
   add_foreign_key "note_links", "notes"
   add_foreign_key "note_texts", "notes"

@@ -1,4 +1,5 @@
 class Note < ActiveRecord::Base
+	
 	belongs_to :notebooks
 
 	has_many :NoteLinks
@@ -12,4 +13,7 @@ class Note < ActiveRecord::Base
 
 	has_many :NoteAudios
 	has_many :audios, :through => :NoteAudios
+
+	has_many :NoteImages
+	has_many :images, :through => :NoteImages
 end

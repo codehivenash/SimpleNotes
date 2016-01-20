@@ -30,6 +30,7 @@ gem 'rmagick'
 gem 'carrierwave'
 
 
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -45,6 +46,7 @@ group :development, :test do
   gem 'pry-rails'
   gem 'byebug'
   gem 'better_errors'
+  gem 'rails-erd'
 
   gem 'meta_request'
   gem 'binding_of_caller'
