@@ -26,7 +26,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 #User added gems
 gem 'devise'
-
+gem 'rmagick'
 gem 'carrierwave'
 
 
