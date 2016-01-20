@@ -1,7 +1,7 @@
 class VideosController < ApplicationController
   before_action :set_video, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate!
-  
+  before_action :authenticate_user!
+
   # GET /videos
   # GET /videos.json
   def index
@@ -70,6 +70,6 @@ class VideosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def video_params
-      params.require(:video).permit(:name, :description, :tags, :owner, :status, :video)
+      params.require(:video).permit(:name, :description, :tags, :owner, :status, :vid)
     end
 end

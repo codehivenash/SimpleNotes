@@ -1,5 +1,5 @@
 class Video < ActiveRecord::Base
-	mount_uploader :avatar, VidUploader
+	mount_uploader :vid, VidUploader
 
 	has_many :NoteVideos
 	has_many :notes, :through => :NoteVideos

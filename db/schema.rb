@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160120120036) do
+ActiveRecord::Schema.define(version: 20160120132102) do
 
   create_table "audios", force: :cascade do |t|
     t.string   "name",        limit: 255
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 20160120120036) do
     t.integer  "status",      limit: 4
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
+    t.string   "aud",         limit: 255
   end
 
   create_table "images", force: :cascade do |t|
@@ -147,7 +148,7 @@ ActiveRecord::Schema.define(version: 20160120120036) do
     t.integer  "status",      limit: 4
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
-    t.string   "video",       limit: 255
+    t.string   "vid",         limit: 255
   end
 
   add_foreign_key "note_audios", "audios"

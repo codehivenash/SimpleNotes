@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
   resources :notes
   resources :notebooks
+  resources :videos
+  resources :images
+  resources :texts
+  resources :audios
+
   root 'home#index'
   
   devise_for :users
