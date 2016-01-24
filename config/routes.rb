@@ -1,21 +1,43 @@
 Rails.application.routes.draw do
+
+  #Application Routes
+
   root 'home#index'
-  get 'dashboard/index'
-
   devise_for :users
+  
+  resources :notebooks do 
+    resources :notes do 
+      resources :videos
+      resources :images
+      resources :texts
+      resources :audios
+    end
+  end
 
-  resources :notebooks
-  resources :notes
-  resources :videos
-  resources :images
-  resources :texts
-  resources :audios
+  get 'home' , :to => "home#index", :as => "home/index"
+  get 'testa' , :to => "home#testing", :as => "home/testing"
+  
+  #API Routes
+
+  namespace :api, defaults: {format: 'json'} do
+    namespace :v1, path: '' do
+      resources :notebooks do
+        resources :notes do 
+          resources :videos
+          resources :images
+          resources :texts
+          resources :audios
+        end
+      end
+    end
+  end
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-   
+
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

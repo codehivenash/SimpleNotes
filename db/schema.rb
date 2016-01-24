@@ -60,10 +60,10 @@ ActiveRecord::Schema.define(version: 20160120152707) do
   add_index "note_audios", ["note_id"], name: "index_note_audios_on_note_id", using: :btree
 
   create_table "note_images", force: :cascade do |t|
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
     t.integer  "note_id",    limit: 4
     t.integer  "image_id",   limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
   end
 
   add_index "note_images", ["image_id"], name: "index_note_images_on_image_id", using: :btree
