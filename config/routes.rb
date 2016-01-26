@@ -4,15 +4,19 @@ Rails.application.routes.draw do
 
   root 'home#index'
   devise_for :users
-  
+
   resources :notebooks do 
-    resources :notes do 
-      resources :videos
-      resources :images
-      resources :texts
-      resources :audios
-    end
+    
   end
+
+  resources :notes do 
+    
+  end
+
+  resources :videos
+  resources :images
+  resources :texts
+  resources :audios
 
   get 'home' , :to => "home#index", :as => "home/index"
   get 'testa' , :to => "home#testing", :as => "home/testing"
