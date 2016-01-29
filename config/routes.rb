@@ -5,13 +5,9 @@ Rails.application.routes.draw do
   root 'home#index'
   devise_for :users
 
-  resources :notebooks do 
-    
-  end
+  resources :notebooks
 
-  resources :notes do 
-    
-  end
+  resources :notes
 
   resources :videos
   resources :images
@@ -26,13 +22,14 @@ Rails.application.routes.draw do
   namespace :api, defaults: {format: 'json'} do
     namespace :v1, path: '' do
       resources :notebooks do
-        resources :notes do 
+        
+      end
+      resources :notes do 
           resources :videos
           resources :images
           resources :texts
           resources :audios
         end
-      end
     end
   end
 
